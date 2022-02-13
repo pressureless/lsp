@@ -1,0 +1,67 @@
+{
+  "scopeName": "source.la",
+  "patterns": [{ "include": "#expression" }],
+  "repository": {
+    "expression": {
+      "patterns": [
+        { "include": "#definition" }, 
+        { "include": "#operator" }, 
+        { "include": "#control" }, 
+        { "include": "#other" }, 
+        { "include": "#function" }, 
+        { "include": "#type" }, 
+        { "include": "#comment" }, 
+        { "include": "#string" }, 
+        { "include": "#numeric" }, 
+        { "include": "#paren-expression" }]
+    },
+    "definition": {
+      "match": "(?<![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])(where|given|from)(?![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])",
+      "name": "keyword.definition"
+    },
+    "operator": {
+      "match": "->|⁻¹|\\|\\||[+-±⋅×/÷^_><ᵀ∈‖\\|\\*]",
+      "name": "keyword.operator"
+    },
+    "control": {
+      "match": "(?<![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])if(?![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])",
+      "name": "keyword.control"
+    },
+    "other": {
+      "match": "(?<![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])(sum|min|max|argmin|argmax|otherwise|subject to|s.t.)(?![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])",
+      "name": "keyword.other"
+    },
+    "function": {
+      "match": "(?<![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])(exp|log|ln|sqrt)(?![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])",
+      "name": "support.function"
+    },
+    "type": {
+      "match": "ℝ|ℤ|(?<![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])(scalar|vector|matrix)(?![A-Za-z\\p{Ll}\\p{Lu}\\p{Lo}\\d])",
+      "name": "support.type"
+    },
+    "comment": {
+      "match": "(?<=.*[:∈].*:)[^`;\n\r\f]*",
+      "name": "comment"
+    },
+    "string": {
+      "match": "`[^`]*`",
+      "name": "string"
+    },
+    "numeric": {
+      "match": "[\u2070\u00B9\u00B2\u00B3\u2074-\u2079\u2080-\u2089\\d]+",
+      "name": "constant.numeric"
+    },
+    "paren-expression": {
+      "begin": "\\(",
+      "end": "\\)",
+      "beginCaptures": {
+        "0": { "name": "punctuation.paren.open" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.paren.close" }
+      },
+      "name": "expression.group",
+      "patterns": [{ "include": "#expression" }]
+    }
+  }
+}
